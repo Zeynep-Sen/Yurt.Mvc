@@ -1,0 +1,48 @@
+﻿@model Yurt.Mvc.Models.Kullanici
+
+@{
+    ViewBag.Title = "Kaydol";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Kaydol</h2>
+<div>
+    @using (Html.BeginForm("Kaydol", "Kullanici", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(o => o.email);
+            @Html.TextBoxFor(o => o.email, new { @type = "email", @class = "form-control" })
+            @Html.ValidationMessageFor(o => o.email)
+            <label id="lblAdHata" style="display:none;color:red">Email alanı boş olamaz</label>
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(o => o.Sifre);
+            @Html.TextBoxFor(o => o.Sifre, new { @type = "password", @class = "form-control" })
+            @Html.ValidationMessageFor(o => o.email)
+            <label id="lblemailHata" style="display:none;color:red">Şifre alanı boş olamaz</label>
+
+        </div>
+        <input type="submit" name="btnKaydet" value="Kaydol" class="btn btn-danger" onclick="return BoslukKontrol()" />
+
+    }
+</div>
+@section scripts{
+    <script>
+       function BoslukKontrol() {
+           var hatayok = true;
+           if ($("#email").val() == ""$("#Sifre").val() == "") {
+               $("#lblAdHata").show();
+               $("#lblemailHata").show();
+               hatayok = false;
+           }
+
+           return hatayok;
+       }
+
+    </script>
+
+}
+
+
+

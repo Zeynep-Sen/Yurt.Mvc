@@ -1,0 +1,33 @@
+﻿@using Yurt.Mvc.Models;
+@{
+    ViewBag.Title = "Okul Listesi";
+}
+@model IEnumerable<Okul>
+<h2>Okul Listesi</h2>
+
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th>Okul Adı</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Okul_Ad</td>
+
+
+                <td>
+                    <a href="/Admin/Okul/OkulGuncelle/@item.OkulID" class="btn btn-sm btn-primary">Guncelle</a>
+                    <a href="/Admin/Okul/OkulSil/@item.OkulID" class="btn btn-danger" onclick="return confirm('Bu okulu silmek istediğinize emin misiniz?')">Sil</a>
+                </td>
+            </tr>
+        }
+
+
+    </tbody>
+
+</table>

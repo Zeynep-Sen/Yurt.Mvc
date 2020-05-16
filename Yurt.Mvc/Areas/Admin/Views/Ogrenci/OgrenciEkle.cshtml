@@ -1,0 +1,79 @@
+﻿@model Yurt.Mvc.Models.Ogrenci
+@{
+    ViewBag.Title = "Ogrenci Ekle";
+}
+
+<h2>Ogrenci Ekle</h2>
+
+<div>
+    @using (Html.BeginForm("OgrenciEkle", "Ogrenci", FormMethod.Post))
+    {
+    <div class="form-group">
+        @Html.LabelFor(o => o.ad);
+        @Html.TextBoxFor(o => o.ad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(o => o.ad)
+        <label class="hata" id="lblAdHata" style="display:none;color:red">Ad alanı boş olamaz</label>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(o => o.soyad);
+        @Html.TextBoxFor(o => o.soyad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(o => o.soyad)
+        <label class="hata" id="lblHataSoyad" style="display:none;color:red">Soyad alanı boş olamaz</label>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(o => o.tc);
+        @Html.TextBoxFor(o => o.tc, new { @type = "number", @class = "form-control" }  )
+        @Html.ValidationMessageFor(o => o.tc)
+        <label class="hata" id="lblTcHata" style="display:none;color:red">Tc alanı boş olamaz</label>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(o => o.anneAd);
+        @Html.TextBoxFor(o => o.anneAd, new { @class = "form-control" })
+        @Html.ValidationMessageFor(o => o.anneAd)
+        <label class="hata" id="lblAnneAdHata" style="display:none;color:red">Anne Ad alanı boş olamaz</label>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(o => o.anneSoyad);
+        @Html.TextBoxFor(o => o.anneSoyad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(o => o.anneSoyad)
+        <label class="hata"id="lblAnneSoyadHata" style="display:none;color:red">Anne soyad alanı boş olamaz</label>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(o => o.babaAd);
+        @Html.TextBoxFor(o => o.babaAd, new { @class = "form-control" })
+        @Html.ValidationMessageFor(o => o.babaAd)
+        <label class="hata" id="lblBabaAdHata" style="display:none;color:red">Baba Ad alanı boş olamaz</label>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(o => o.babaSoyad);
+        @Html.TextBoxFor(o => o.babaSoyad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(o => o.babaSoyad)
+        <label class="hata" id="lblBabaSoyadHata" style="display:none;color:red">Baba Soyad alanı boş olamaz</label>
+
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(o => o.okulId);
+
+        @Html.DropDownListFor(o => o.okulId, (List<SelectListItem>)ViewBag.okulList, "Okul")
+        @Html.ValidationMessageFor(o => o.okulId)
+        <label class="hata" id="lblOkulidHata" style="display:none;color:red">Lütfen Okul seçiniz</label>
+    </div>
+
+        <input type="submit" name="button" value="Kaydet" class="btn btn-danger" onclick="return BoslukKontrol()" />
+    }
+</div>
+@section scripts{
+    <script>
+       function BoslukKontrol() {
+           var hatayok = true;
+           if ($("#ad").val() == "" || $("#babaAd").val() == "" || $("#babaSoyad").val() == "" || $("#anneAd").val() == "" || $("#ammeSoyad").val() == "" || $("#tc").val() == "" || $("#soyad").val() == "") {
+               $(".hata").show();
+               hatayok = false;
+           }
+
+           return hatayok;
+       }
+
+    </script>
+
+}

@@ -1,0 +1,36 @@
+﻿@model Yurt.Mvc.Models.Okul
+
+@{
+    ViewBag.Title = "Okul Ekleme Sayfası";
+}
+
+<h2>Okul Ekle</h2>
+<div>
+    @using (Html.BeginForm("OkulEkle", "Okul", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(o => o.Okul_Ad);
+            @Html.TextBoxFor(o => o.Okul_Ad, new { @class = "form-control" })
+            @Html.ValidationMessageFor(o => o.Okul_Ad)
+            <label id="lblAdHata" style="display:none;color:red">Ad alanı boş olamaz</label>
+
+        </div>
+        <input type="submit" name="btnKaydet" value="Kaydet" class="btn btn-danger" onclick="return BoslukKontrol()" />
+
+    }
+</div>
+@section scripts{
+   <script>
+       function BoslukKontrol() {
+           var hatayok = true;
+           if ($("#Okul_Ad").val() == "") {
+               $("#lblAdHata").show();
+               hatayok = false;
+           }
+
+           return hatayok;
+       }
+
+    </script>
+
+}
