@@ -9,7 +9,7 @@ using Yurt.Mvc.Models;
 
 namespace Yurt.Mvc.Areas.Admin.Controllers
 {[Authorize]
-    public class OkulController : Controller
+    public class OkulController : Controller,IDisposable
     {
         // GET: Admin/Okul
         YurtContext ctx = new YurtContext();
@@ -72,6 +72,10 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
 
         protected override void Dispose(bool disposing)
         {
+            if (disposing)
+            {
+                ctx.Dispose();
+            }
             base.Dispose(disposing);
         }
     }

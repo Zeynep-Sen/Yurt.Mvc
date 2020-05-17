@@ -10,7 +10,7 @@ using Yurt.Mvc.Models;
 namespace Yurt.Mvc.Areas.Admin.Controllers
 {
     [AllowAnonymous]
-    public class SecurityController : Controller
+    public class SecurityController : Controller,IDisposable
     {
 
         // GET: Admin/Security
@@ -41,6 +41,14 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
             FormsAuthentication.SignOut();
 
             return View("Login");
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ctx.Dispose();
+            }
+            base.Dispose(disposing);
         }
 
     }

@@ -9,6 +9,7 @@
     @using (Html.BeginForm("OgrenciEkle", "Ogrenci", FormMethod.Post))
     {
     <div class="form-group">
+       
         @Html.LabelFor(o => o.ad);
         @Html.TextBoxFor(o => o.ad, new { @class = "form-control" })
         @Html.ValidationMessageFor(o => o.ad)
@@ -54,7 +55,7 @@
     <div class="form-group">
         @Html.LabelFor(o => o.okulId);
 
-        @Html.DropDownListFor(o => o.okulId, (List<SelectListItem>)ViewBag.okulList, "Okul")
+        @Html.DropDownListFor(o => o.okulId, (List<SelectListItem>)ViewBag.okulId, "Okul")
         @Html.ValidationMessageFor(o => o.okulId)
         <label class="hata" id="lblOkulidHata" style="display:none;color:red">Lütfen Okul seçiniz</label>
     </div>

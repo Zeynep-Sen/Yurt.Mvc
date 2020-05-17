@@ -52,7 +52,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="w3_info">
                     <h2>Giriş Yapın</h2>
                     <p>Bilgilerinizi girin.</p>
-                    @ViewBag.girishata
+                    @ViewBag.girisHata
                     @using (Html.BeginForm("Login", "Security", FormMethod.Post))
                     {@Html.HiddenFor(k => k.KullaniciId)
                     <label>Email Adresi</label>
@@ -63,6 +63,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 
                         @Html.TextBoxFor(k => k.email, new { @type = "email", @class = "form-control" })
                         @Html.ValidationMessageFor(k => k.email)
+                        
                     </div>
                     <label>Password</label>
                     <div class="input-group">

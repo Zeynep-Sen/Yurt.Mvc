@@ -9,7 +9,7 @@ using Yurt.Mvc.Models;
 
 namespace Yurt.Mvc.Areas.Admin.Controllers
 {   [Authorize]
-    public class OgrenciController : Controller
+    public class OgrenciController : Controller,IDisposable
     {
         // GET: Admin/Ogrenci
         YurtContext ctx = new YurtContext();
@@ -30,7 +30,7 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
         }
         public ActionResult OgrenciEkle()
         {
-            List<SelectListItem> okulList = (from i in ctx.Okullar.ToList()
+            List<SelectListItem> okulId = (from i in ctx.Okullar.ToList()
                                              select new SelectListItem
                                              {
                                                  Text = i.Okul_Ad,
@@ -38,7 +38,7 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
                                              }).ToList();
 
 
-            ViewBag.okulList = okulList;
+            ViewBag.okulId = okulId;
             return View();
         }
         [HttpPost]
@@ -61,14 +61,14 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
         }
         public ActionResult Guncelle(int? id, Ogrenci o)
         {
-            List<SelectListItem> okulList = (from i in ctx.Okullar.ToList()
+            List<SelectListItem> okulId = (from i in ctx.Okullar.ToList()
                                              select new SelectListItem
                                              {
                                                  Text = i.Okul_Ad,
                                                  Value = i.OkulID.ToString()
                                              }).ToList();
 
-            ViewBag.okulList = okulList;
+            ViewBag.okulId = okulId;
             var ogr = ctx.Ogrenciler.Find(id);
 
             if (ModelState.IsValid)
@@ -81,15 +81,16 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Guncelle(Ogrenci ogr)
         {
-            if (ModelState.IsValid)
-            {
+            
+            
                 ctx.Entry(ogr).State = EntityState.Modified;
                 int sonuc = ctx.SaveChanges();
                 if (sonuc > 0)
                 {
                     return RedirectToAction("Index");
                 }
-            }
+            
+           
             return View();
         }
         public ActionResult OgrenciSil(int? id)
@@ -103,6 +104,10 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
 
         protected override void Dispose(bool disposing)
         {
+            if (disposing)
+            {
+                ctx.Dispose();
+            }
             base.Dispose(disposing);
         }
     }

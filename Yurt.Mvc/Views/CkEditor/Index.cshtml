@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Bize Ulaşın..</h2>
+<input type="email" name="email" value="" placeholder="E-mail" class="form-control" />
+<label class="hata"  style="display:none;color:red">E-mail alanı boş olamaz</label>
+<input type="text" name="ad" value="" placeholder="Ad" class="form-control" />
+<label class="hata"  style="display:none;color:red">Ad olanı boş olamaz</label>
+<input type="text" name="soyad" value="" placeholder="Soyad" class="form-control" />
+<label class="hata"  style="display:none;color:red">Soyad alanı boş olamaz</label>
+<div>
+    @Html.TextArea("edit", ViewData.TemplateInfo.FormattedModelValue.ToString(), new { @class = "ckeditor" })
+    <label class="hata"  style="display:none;color:red">Mesaj Kutusu Boş olamaz</label>
+</div>
+<input type="submit" name="btn" value="Gönder" class="btn btn-success" onclick="return BoslukKontrol()" />
+
+
+
+@section scripts{
+    <script>
+        function BoslukKontrol() {
+            var hatayok = true;
+            if ($("#email").val() == "" || $("#ad").val() == "" || $("#edit").val() == "") {
+                $(".hata").show();
+                alert('Mesajınız Başarıyla Gönderildi')
+                hatayok = false;
+            }
+
+            return hatayok;
+        }
+
+    </script>
+
+}

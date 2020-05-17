@@ -8,7 +8,7 @@ using Yurt.Mvc.Models;
 
 namespace Yurt.Mvc.Areas.Admin.Controllers
 {    [AllowAnonymous]
-    public class KullaniciController : Controller
+    public class KullaniciController : Controller,IDisposable
     {
         // GET: Admin/Kullanici
         YurtContext ctx = new YurtContext();
@@ -31,6 +31,14 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
                 return RedirectToAction("Login","Security");
             }
             return View();
+        }
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                ctx.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }
