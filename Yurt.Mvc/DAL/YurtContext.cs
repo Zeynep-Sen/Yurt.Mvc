@@ -34,7 +34,7 @@ namespace Yurt.Mvc.DAL
 
             modelBuilder.Entity<Okul>().ToTable("tblOkul");
 
-            modelBuilder.Entity<Okul>().Property(o => o.Okul_Ad).HasMaxLength(10).IsRequired().HasColumnType("varchar");
+            modelBuilder.Entity<Okul>().Property(o => o.Okul_Ad).HasMaxLength(50).IsRequired().HasColumnType("varchar");
 
             modelBuilder.Entity<Kullanici>().ToTable("tblKullanici");
 

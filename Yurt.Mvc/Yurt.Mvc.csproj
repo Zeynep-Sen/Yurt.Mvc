@@ -488,6 +488,7 @@
     <Compile Include="Areas\Admin\Controllers\OkulController.cs" />
     <Compile Include="Areas\Admin\Controllers\SecurityController.cs" />
     <Compile Include="Controllers\CkEditorController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DAL\YurtContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -515,6 +516,7 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
     <Content Include="Views\Shared\EditorTemplates\Html.cshtml" />
     <Content Include="Views\CkEditor\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

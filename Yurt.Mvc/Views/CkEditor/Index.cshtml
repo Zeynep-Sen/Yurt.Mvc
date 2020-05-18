@@ -12,8 +12,16 @@
 <input type="text" name="soyad" value="" placeholder="Soyad" class="form-control" />
 <label class="hata"  style="display:none;color:red">Soyad alanı boş olamaz</label>
 <div>
-    @Html.TextArea("edit", ViewData.TemplateInfo.FormattedModelValue.ToString(), new { @class = "ckeditor" })
-    <label class="hata"  style="display:none;color:red">Mesaj Kutusu Boş olamaz</label>
+    @Html.TextArea("Iletisim")
+    <script type="text/javascript">
+            var editor = CKEDITOR.instances['Iletisim'];
+            if (editor) { editor.destroy(true); }
+            CKEDITOR.replace('Iletisim', {
+                enterMode: CKEDITOR.ENTER_BR,
+            });
+            CKFinder.setupCKEditor(null, '@Url.Content("~/ckeditor/ckfinder/")');
+    </script>
+    <label class="hata" style="display:none;color:red">Mesaj Kutusu Boş olamaz</label>
 </div>
 <input type="submit" name="btn" value="Gönder" class="btn btn-success" onclick="return BoslukKontrol()" />
 
