@@ -9,7 +9,7 @@ using Yurt.Mvc.DAL;
 using Yurt.Mvc.Models;
 
 namespace Yurt.Mvc.Areas.Admin.Controllers
-{   
+{  
     public class OgrenciController : Controller, IDisposable
     {
         // GET: Admin/Ogrenci
@@ -111,6 +111,7 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
             ctx.SaveChanges();
             return RedirectToAction("Index");
         }
+      
 
         protected override void Dispose(bool disposing)
         {
@@ -119,6 +120,7 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
                 ctx.Dispose();
             }
             base.Dispose(disposing);
+
         }
     }
 }

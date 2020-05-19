@@ -9,7 +9,7 @@ using Yurt.Mvc.DAL;
 using Yurt.Mvc.Models;
 
 namespace Yurt.Mvc.Areas.Admin.Controllers
-{[Authorize]
+{
     public class OkulController : Controller,IDisposable
     {
         // GET: Admin/Okul
