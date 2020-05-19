@@ -27,7 +27,7 @@ namespace Yurt.Mvc.Models
         public string babaAd { get; set; }
         [Display(Name = "Tc Kimlik Numarası")]
         [Required]
-        
+        [MaxLength(11)]
         public string tc { get; set; }
         [Display(Name = "Baba Soyadı")]
         [Required]

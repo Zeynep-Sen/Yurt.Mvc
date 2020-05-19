@@ -8,7 +8,7 @@ using Yurt.Mvc.DAL;
 using Yurt.Mvc.Models;
 
 namespace Yurt.Mvc.Areas.Admin.Controllers
-{   [Authorize]
+{   
     public class OgrenciController : Controller,IDisposable
     {
         // GET: Admin/Ogrenci
@@ -23,7 +23,7 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
                                                  Value = i.OkulID.ToString()
                                              }).ToList();
 
-            ViewBag.okulList = okulList;
+            ViewBag.okulId = okulList;
             var ogrenciler = ctx.Ogrenciler.ToList();
             return View(ogrenciler);
 
@@ -61,14 +61,15 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
         }
         public ActionResult Guncelle(int? id, Ogrenci o)
         {
-            List<SelectListItem> okulId = (from i in ctx.Okullar.ToList()
+            List<SelectListItem> okulList = (from i in ctx.Okullar.ToList()
                                              select new SelectListItem
                                              {
                                                  Text = i.Okul_Ad,
                                                  Value = i.OkulID.ToString()
-                                             }).ToList();
+                                                 
+                                             }).ToList(); 
 
-            ViewBag.okulId = okulId;
+            ViewBag.okulId = okulList;
             var ogr = ctx.Ogrenciler.Find(id);
 
             if (ModelState.IsValid)

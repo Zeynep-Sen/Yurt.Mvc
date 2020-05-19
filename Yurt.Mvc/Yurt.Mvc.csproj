@@ -466,7 +466,9 @@
     <Content Include="web\index.html" />
     <Content Include="web\w3layouts-License.txt" />
     <Content Include="Areas\Admin\Views\Security\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\AnaSayfa\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Kullanici\Kaydol.cshtml" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -483,6 +485,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AnaSayfaController.cs" />
     <Compile Include="Areas\Admin\Controllers\KullaniciController.cs" />
     <Compile Include="Areas\Admin\Controllers\OgrenciController.cs" />
     <Compile Include="Areas\Admin\Controllers\OkulController.cs" />

@@ -23,7 +23,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(o => o.tc);
-        @Html.TextBoxFor(o => o.tc, new { @type = "number", @class = "form-control" }  )
+        @Html.TextBoxFor(o => o.tc, new {@maxlength=11, @type = "number", @class = "form-control" }  )
         @Html.ValidationMessageFor(o => o.tc)
         <label class="hata" id="lblTcHata" style="display:none;color:red">Tc alanı boş olamaz</label>
     </div>
@@ -55,7 +55,8 @@
     <div class="form-group">
         @Html.LabelFor(o => o.okulId);
 
-        @Html.DropDownListFor(o => o.okulId, (List<SelectListItem>)ViewBag.okulId, "Okul")
+        @Html.DropDownListFor(o => o.okulId, (List<SelectListItem>)@ViewBag.okulId, new { @class = "form-control" })
+        
         @Html.ValidationMessageFor(o => o.okulId)
         <label class="hata" id="lblOkulidHata" style="display:none;color:red">Lütfen Okul seçiniz</label>
     </div>
@@ -67,7 +68,7 @@
     <script>
        function BoslukKontrol() {
            var hatayok = true;
-           if ($("#ad").val() == "" || $("#babaAd").val() == "" || $("#babaSoyad").val() == "" || $("#anneAd").val() == "" || $("#ammeSoyad").val() == "" || $("#tc").val() == "" || $("#soyad").val() == "") {
+           if ($("#ad").val() == "" || $("#babaAd").val() == "" || $("#babaSoyad").val() == "" || $("#anneAd").val() == "" || $("#anneSoyad").val() == "" || $("#tc").val() == "" || $("#soyad").val() == ""|| $("#okulId option:selected").val() == "") {
                $(".hata").show();
                hatayok = false;
            }

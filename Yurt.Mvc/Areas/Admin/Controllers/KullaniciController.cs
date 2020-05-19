@@ -29,6 +29,7 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
             if (sonuc > 0)
             {
                 return RedirectToAction("Login","Security");
+                ViewBag.login = "Kayıt başarılı";
             }
             return View();
         }

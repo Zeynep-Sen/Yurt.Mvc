@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Yurt.Mvc.Controllers
-{   [AllowAnonymous]
-    public class HomeController : Controller
+namespace Yurt.Mvc.Areas.Admin.Controllers
+{
+    public class AnaSayfaController : Controller
     {
-        // GET: Home
+        // GET: Admin/AnaSayfa
         public ActionResult Index()
         {
             return View();

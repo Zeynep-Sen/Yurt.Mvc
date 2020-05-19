@@ -1,48 +1,91 @@
 ﻿@model Yurt.Mvc.Models.Kullanici
-
 @{
-    ViewBag.Title = "Kaydol";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 
-<h2>Kaydol</h2>
-<div>
-    @using (Html.BeginForm("Kaydol", "Kullanici", FormMethod.Post))
-    {
-        <div class="form-group">
-            @Html.LabelFor(o => o.email);
-            @Html.TextBoxFor(o => o.email, new { @type = "email", @class = "form-control" })
-            @Html.ValidationMessageFor(o => o.email)
-            <label id="lblAdHata" style="display:none;color:red">Email alanı boş olamaz</label>
-
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(o => o.Sifre);
-            @Html.TextBoxFor(o => o.Sifre, new { @type = "password", @class = "form-control" })
-            @Html.ValidationMessageFor(o => o.email)
-            <label id="lblemailHata" style="display:none;color:red">Şifre alanı boş olamaz</label>
-
-        </div>
-        <input type="submit" name="btnKaydet" value="Kaydol" class="btn btn-danger" onclick="return BoslukKontrol()" />
-
-    }
-</div>
-@section scripts{
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Business Login Form Responsive Widget Template :: w3layouts</title>
+    <!-- Meta-Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Business Login Form a Responsive Web Template, Bootstrap Web Templates, Flat Web Templates, Android Compatible Web Template, Smartphone Compatible Web Template, Free Webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design">
     <script>
-       function BoslukKontrol() {
-           var hatayok = true;
-           if ($("#email").val() == ""$("#Sifre").val() == "") {
-               $("#lblAdHata").show();
-               $("#lblemailHata").show();
-               hatayok = false;
-           }
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
 
-           return hatayok;
-       }
-
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
     </script>
+    <!-- //Meta-Tags -->
+    <!-- css files -->
+    <link href="~/web/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
+    <link href="~/web/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- //css files -->
+    <!-- google fonts -->
+    <link href="//fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- //google fonts -->
 
-}
+</head>
+<body>
 
+    <div class="signupform">
+        <div class="container">
+            <!-- main content -->
+            <div class="agile_info">
+                <div class="w3l_form">
+                    <div class="left_grid_info">
+                        <h1>KAYIT OL!</h1>
+                        <p></p>
+                        <img src="~/web/images/image.jpg" alt="" />
+                    </div>
+                </div>
+                <div class="w3_info">
+                    <h2>KAYIT OLUN</h2>
+                    <p>Bilgilerinizi girin.</p>
+                    @ViewBag.girisHata
+                    @using (Html.BeginForm("Kaydol", "Kullanici", FormMethod.Post))
+                    {
+                    <label>Email Adresi</label>
 
+                    <div class="input-group">
 
+                        <span class="fa fa-envelope" aria-hidden="true"></span>
+
+                        @Html.TextBoxFor(k => k.email, new { @type = "email", @class = "form-control" })
+                        @Html.ValidationMessageFor(k => k.email)
+                        
+                    </div>
+                    <label>Password</label>
+                    <div class="input-group">
+                        <span class="fa fa-lock" aria-hidden="true"></span>
+                        @Html.TextBoxFor(k => k.Sifre, new { @type = "password", @class = "form-control" })
+                        @Html.ValidationMessageFor(k => k.Sifre)
+                    </div>
+
+                    <button class="btn btn-danger btn-block" type="submit" onclick="alert(@ViewBag.login)">Kayıt Ol</button>
+                }
+                    
+                   
+
+                </div>
+            </div>
+            <!-- //main content -->
+        </div>
+        <!-- footer -->
+        <div class="footer">
+        </div>
+        <!-- footer -->
+    </div>
+
+</body>
+</html>
