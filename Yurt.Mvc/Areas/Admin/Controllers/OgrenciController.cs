@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -9,11 +10,11 @@ using Yurt.Mvc.Models;
 
 namespace Yurt.Mvc.Areas.Admin.Controllers
 {   
-    public class OgrenciController : Controller,IDisposable
+    public class OgrenciController : Controller, IDisposable
     {
         // GET: Admin/Ogrenci
         YurtContext ctx = new YurtContext();
-       
+
         public ActionResult Index()
         {
             List<SelectListItem> okulList = (from i in ctx.Okullar.ToList()
@@ -30,46 +31,46 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
         }
         public ActionResult OgrenciEkle()
         {
-            List<SelectListItem> okulId = (from i in ctx.Okullar.ToList()
-                                             select new SelectListItem
-                                             {
-                                                 Text = i.Okul_Ad,
-                                                 Value = i.OkulID.ToString()
-                                             }).ToList();
-
-
-            ViewBag.okulId = okulId;
+           
+            var okulList = ctx.Okullar.ToList();
+            ViewBag.okulId = okulList;
             return View();
         }
         [HttpPost]
         public ActionResult OgrenciEkle(Ogrenci ogr)
         {
 
-            if (ModelState.IsValid)
+            try
             {
-                var okl = ctx.Okullar.Find(ogr.okulId);
-                ogr.okulu = okl;
-                ctx.Ogrenciler.Add(ogr);
-            }
+                if (ModelState.IsValid)
+                {
+                    var okl = ctx.Okullar.Find(ogr.okulId);
+                    ogr.okulu = okl;
+                    ctx.Ogrenciler.Add(ogr);
+                }
 
-            int sonuc = ctx.SaveChanges();
-            if (sonuc > 0)
+                int sonuc = ctx.SaveChanges();
+                if (sonuc > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+
+            }
+            catch (DbEntityValidationException ex)
             {
-                return RedirectToAction("Index");
+                Response.Write(ex);
+
             }
             return View();
         }
         public ActionResult Guncelle(int? id, Ogrenci o)
         {
-            List<SelectListItem> okulList = (from i in ctx.Okullar.ToList()
-                                             select new SelectListItem
-                                             {
-                                                 Text = i.Okul_Ad,
-                                                 Value = i.OkulID.ToString()
-                                                 
-                                             }).ToList(); 
+           
+            var okulList = ctx.Okullar.ToList();
+
 
             ViewBag.okulId = okulList;
+            
             var ogr = ctx.Ogrenciler.Find(id);
 
             if (ModelState.IsValid)
@@ -82,16 +83,24 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Guncelle(Ogrenci ogr)
         {
-            
-            
+
+
+            try
+            {
                 ctx.Entry(ogr).State = EntityState.Modified;
                 int sonuc = ctx.SaveChanges();
                 if (sonuc > 0)
                 {
                     return RedirectToAction("Index");
                 }
-            
-           
+
+            }
+            catch (DbEntityValidationException ex)
+            {
+                Response.Write(ex);
+                
+            }
+
             return View();
         }
         public ActionResult OgrenciSil(int? id)

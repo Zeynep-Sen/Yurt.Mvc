@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -26,15 +27,23 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
         public ActionResult OkulEkle(Okul okl)
         {
 
-            if (ModelState.IsValid)
+            try
             {
-                ctx.Okullar.Add(okl);
-            }
+                if (ModelState.IsValid)
+                {
+                    ctx.Okullar.Add(okl);
+                }
 
-            int sonuc = ctx.SaveChanges();
-            if (sonuc > 0)
+                int sonuc = ctx.SaveChanges();
+                if (sonuc > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DbEntityValidationException ex)
             {
-                return RedirectToAction("Index");
+
+                Response.Write(ex);
             }
             return View();
         }
@@ -53,11 +62,19 @@ namespace Yurt.Mvc.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult OkulGuncelle(Okul okl)
         {
-            if (ModelState.IsValid)
+            try
             {
-                ctx.Entry(okl).State = EntityState.Modified;
-                ctx.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    ctx.Entry(okl).State = EntityState.Modified;
+                    ctx.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DbEntityValidationException ex)
+            {
+
+                Response.Write(ex);
             }
             return View();
         }

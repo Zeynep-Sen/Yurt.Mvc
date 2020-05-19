@@ -52,31 +52,49 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="w3_info">
                     <h2>KAYIT OLUN</h2>
                     <p>Bilgilerinizi girin.</p>
-                    @ViewBag.girisHata
+                    @ViewBag.kulVar
                     @using (Html.BeginForm("Kaydol", "Kullanici", FormMethod.Post))
                     {
-                    <label>Email Adresi</label>
+                        <label>Email Adresi</label>
 
-                    <div class="input-group">
+                        <div class="input-group">
 
-                        <span class="fa fa-envelope" aria-hidden="true"></span>
+                            <span class="fa fa-envelope" aria-hidden="true"></span>
 
-                        @Html.TextBoxFor(k => k.email, new { @type = "email", @class = "form-control" })
-                        @Html.ValidationMessageFor(k => k.email)
-                        
-                    </div>
-                    <label>Password</label>
-                    <div class="input-group">
-                        <span class="fa fa-lock" aria-hidden="true"></span>
-                        @Html.TextBoxFor(k => k.Sifre, new { @type = "password", @class = "form-control" })
-                        @Html.ValidationMessageFor(k => k.Sifre)
-                    </div>
+                            @Html.TextBoxFor(k => k.email, new { @type = "email", @class = "form-control" })
+                            @Html.ValidationMessageFor(k => k.email)
+                            <label id="lblAdHata" style="display:none;color:red">Email alanı boş olamaz</label>
 
-                    <button class="btn btn-danger btn-block" type="submit" onclick="alert(@ViewBag.login)">Kayıt Ol</button>
-                }
-                    
-                   
 
+                        </div>
+                        <label>Password</label>
+                        <div class="input-group">
+                            <span class="fa fa-lock" aria-hidden="true"></span>
+                            @Html.TextBoxFor(k => k.Sifre, new { @type = "password", @class = "form-control" })
+                            @Html.ValidationMessageFor(k => k.Sifre)
+                            <label id="lblemailHata" style="display:none;color:red">Şifre alanı boş olamaz</label>
+                        </div>
+
+                        <button class="btn btn-danger btn-block" type="submit" onclick="return BoslukKontrol()">Kayıt Ol</button>
+                    }
+
+
+                    @section scripts{
+                        <script>
+                            function BoslukKontrol() {
+                                var hatayok = true;
+                                if ($("#email").val() == ""$("#Sifre").val() == "") {
+                                    $("#lblAdHata").show();
+                                    $("#lblemailHata").show();
+                                    hatayok = false;
+                                }
+
+                                return hatayok;
+                            }
+
+                        </script>
+
+                    }
                 </div>
             </div>
             <!-- //main content -->
@@ -86,6 +104,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
         </div>
         <!-- footer -->
     </div>
-
+   
 </body>
 </html>

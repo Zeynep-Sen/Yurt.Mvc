@@ -55,13 +55,21 @@
     <div class="form-group">
         @Html.LabelFor(o => o.okulId);
 
-        @Html.DropDownListFor(o => o.okulId, (List<SelectListItem>)@ViewBag.okulId, new { @class = "form-control" })
-        
+        @*@Html.DropDownListFor(o => o.okulId, (List<SelectListItem>)@ViewBag.okulId, new { @class = "form-control" })*@
+        <select class="form-control" id="okulId" name="okulId">
+            @foreach (var item in ViewBag.okulId)
+            {
+                <option value="@item.OkulID">@item.Okul_Ad</option>
+
+            }
+
+        </select>
+        <span class="field-validation-valid" data-valmsg-for="okulId" data-valmsg-replace="true"></span>
         @Html.ValidationMessageFor(o => o.okulId)
         <label class="hata" id="lblOkulidHata" style="display:none;color:red">Lütfen Okul seçiniz</label>
     </div>
 
-        <input type="submit" name="button" value="Kaydet" class="btn btn-danger" onclick="return BoslukKontrol()" />
+        <input type="submit" name="button" value="Kaydet" class="btn btn-danger" onclick="return BoslukKontrol()"  />
     }
 </div>
 @section scripts{
